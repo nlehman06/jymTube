@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\AbstractUser;
+use Laravel\Socialite\Facades\Socialite;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
+
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -35,5 +39,57 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @param $provider
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @param $provider
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
+
+        return redirect($this->redirectTo);
+    }
+
+    /**
+     * If a user has registered before using social auth, return the user
+     * else, create a new user object.
+     * @param  AbstractUser $user Socialite user object
+     * @param String $provider Social auth provider
+     * @return  User
+     */
+    public function findOrCreateUser($user, $provider)
+    {
+        $authUser = User::where('provider_id', $user->getId())->first();
+        if ($authUser)
+        {
+            return $authUser;
+        }
+
+        return User::create([
+            'username'    => $user->getName(),
+            'nickName'    => $user->getNickname(),
+            'email'       => $user->getEmail(),
+            'provider'    => $provider,
+            'provider_id' => $user->getId(),
+            'avatar'      => $user->getAvatar()
+        ]);
     }
 }

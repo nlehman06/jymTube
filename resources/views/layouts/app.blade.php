@@ -10,66 +10,60 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+<body class="bg-grey-lightest font-body text-orange-darkest min-h-screen">
+<div id="app">
 
-                    </ul>
+    <nav class="flex bg-grey-lightest p-3 shadow">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between flex-no-wrap">
+                <div class="font-title text-orange-dark flex-none mr-6 w-1/4 text-3xl">JymTube</div>
+                <div class="text-white flex-grow">
+                    <div class="relative">
+                        <input type="text" placeholder="IMPROVE YOURSELF"
+                               class="w-full rounded shadow appearance-none border font-title text-orange-darkest bg-orange-lightest text-xl pl-3 py-2 pr-10">
+                        <button class="btn btn-orange absolute pin-t pin-r mt-px mr-px text-xl">
+                            Search
+                        </button>
+                    </div>
                 </div>
+                @auth
+                    <div class="text-orange-darker flex-none w-1/4 flex justify-center items-center">
+                        <img src="{{ auth()->user()->avatar }}" class="rounded-full mr-3">
+                        <span class="text-lg">{{ auth()->user()->nickName }}</span>
+                    </div>
+                @endauth
+                @guest
+                    <div></div>
+                @endguest
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4 container mx-auto">
+        @yield('content')
+    </main>
+
+    <footer class="bg-grey-light shadow absolute pin-b w-full py-4">
+        <div class="container w-full mx-auto text-center">
+            <p class="py-2">See a Jim Stoppani video that we missed?</p>
+            <a href="{{ route('addVideo') }}"
+               class="btn btn-orange">
+                Add a Jim Stoppani Video
+            </a>
+        </div>
+    </footer>
+</div>
+
+
+<!-- Scripts -->
+<script src="{{ asset('js/manifest.js') }}" defer></script>
+<script src="{{ asset('js/vendor.js') }}" defer></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+
 </body>
 </html>

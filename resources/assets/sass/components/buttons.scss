@@ -1,0 +1,16 @@
+
+.btn {
+  @apply .inline-block .py-2 .px-4 .text-center .whitespace-no-wrap .align-middle .cursor-pointer .rounded .no-underline .shadow .my-2;
+}
+
+.btn-orange {
+  @apply .text-orange-lightest .bg-orange;
+}
+
+.btn-orange:hover {
+  @apply .bg-orange-light .text-orange-dark;
+}
+
+.btn-orange:disabled {
+  @apply .opacity-50 .cursor-not-allowed;
+}

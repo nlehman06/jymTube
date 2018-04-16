@@ -1,4 +1,6 @@
 let mix = require('laravel-mix');
+let tailwindcss = require('tailwindcss');
+const webpack = require('webpack');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,4 +14,16 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .extract([
+        'moment'
+    ])
+    .sass('resources/assets/sass/app.scss', 'public/css/app.css')
+    .webpackConfig({
+        plugins: [
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+        ]
+    })
+    .options({
+        processCssUrls: false,
+        postCss:        [tailwindcss('./tailwind.js')],
+    });

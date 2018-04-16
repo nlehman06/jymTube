@@ -1,0 +1,11 @@
+.form-group {
+  @apply .flex .flex-col .mb-4;
+}
+
+.label {
+  @apply .mb-2 .uppercase .font-bold .text-lg;
+}
+
+.input-text {
+  @apply .border .py-2 .px-3 .text-orange-darkest shadow rounded appearance-none;
+}
