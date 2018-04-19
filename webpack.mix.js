@@ -14,9 +14,6 @@ const webpack = require('webpack');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    .extract([
-        'moment'
-    ])
     .sass('resources/assets/sass/app.scss', 'public/css/app.css')
     .webpackConfig({
         plugins: [

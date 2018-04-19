@@ -36,8 +36,8 @@
                 t.checkUrlButtonText = 'Checking...';
                 t.loading = true;
                 t.responseData = {
-                    urlData:   null,
-                    errorData: null
+                    urlData:   {},
+                    errorData: {}
                 };
 
                 axios.post('/api/addVideo/checkURL', {url: t.urlToCheck})

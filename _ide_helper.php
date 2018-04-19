@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.13 on 2018-03-30 16:11:58.
+ * Generated for Laravel 5.6.13 on 2018-04-18 08:13:41.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -12403,6 +12403,396 @@ namespace Illuminate\Support\Facades {
  
 }
 
+namespace Alaouy\Youtube\Facades { 
+
+    class Youtube {
+        
+        /**
+         * 
+         *
+         * @param $key
+         * @return \Youtube 
+         * @static 
+         */ 
+        public static function setApiKey($key)
+        {
+            return \Alaouy\Youtube\Youtube::setApiKey($key);
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getApiKey()
+        {
+            return \Alaouy\Youtube\Youtube::getApiKey();
+        }
+        
+        /**
+         * 
+         *
+         * @param $regionCode
+         * @return \StdClass 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getCategories($regionCode = 'US', $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getCategories($regionCode, $part);
+        }
+        
+        /**
+         * 
+         *
+         * @param $vId
+         * @param array $part
+         * @return \StdClass 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getVideoInfo($vId, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getVideoInfo($vId, $part);
+        }
+        
+        /**
+         * Gets popular videos for a specific region (ISO 3166-1 alpha-2)
+         *
+         * @param $regionCode
+         * @param integer $maxResults
+         * @param array $part
+         * @return array 
+         * @static 
+         */ 
+        public static function getPopularVideos($regionCode, $maxResults = 10, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getPopularVideos($regionCode, $maxResults, $part);
+        }
+        
+        /**
+         * Simple search interface, this search all stuffs
+         * and order by relevance
+         *
+         * @param $q
+         * @param integer $maxResults
+         * @param array $part
+         * @return array 
+         * @static 
+         */ 
+        public static function search($q, $maxResults = 10, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::search($q, $maxResults, $part);
+        }
+        
+        /**
+         * Search only videos
+         *
+         * @param string $q Query
+         * @param integer $maxResults number of results to return
+         * @param string $order Order by
+         * @param array $part
+         * @return \StdClass API results
+         * @static 
+         */ 
+        public static function searchVideos($q, $maxResults = 10, $order = null, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::searchVideos($q, $maxResults, $order, $part);
+        }
+        
+        /**
+         * Search only videos in the channel
+         *
+         * @param string $q
+         * @param string $channelId
+         * @param integer $maxResults
+         * @param string $order
+         * @param array $part
+         * @param $pageInfo
+         * @return array 
+         * @static 
+         */ 
+        public static function searchChannelVideos($q, $channelId, $maxResults = 10, $order = null, $part = array(), $pageInfo = false)
+        {
+            return \Alaouy\Youtube\Youtube::searchChannelVideos($q, $channelId, $maxResults, $order, $part, $pageInfo);
+        }
+        
+        /**
+         * List videos in the channel
+         *
+         * @param string $channelId
+         * @param integer $maxResults
+         * @param string $order
+         * @param array $part
+         * @param $pageInfo
+         * @return array 
+         * @static 
+         */ 
+        public static function listChannelVideos($channelId, $maxResults = 10, $order = null, $part = array(), $pageInfo = false)
+        {
+            return \Alaouy\Youtube\Youtube::listChannelVideos($channelId, $maxResults, $order, $part, $pageInfo);
+        }
+        
+        /**
+         * Generic Search interface, use any parameters specified in
+         * the API reference
+         *
+         * @param $params
+         * @param $pageInfo
+         * @return array 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function searchAdvanced($params, $pageInfo = false)
+        {
+            return \Alaouy\Youtube\Youtube::searchAdvanced($params, $pageInfo);
+        }
+        
+        /**
+         * Generic Search Paginator, use any parameters specified in
+         * the API reference and pass through nextPageToken as $token if set.
+         *
+         * @param $params
+         * @param $token
+         * @return array 
+         * @static 
+         */ 
+        public static function paginateResults($params, $token = null)
+        {
+            return \Alaouy\Youtube\Youtube::paginateResults($params, $token);
+        }
+        
+        /**
+         * 
+         *
+         * @param $username
+         * @param $optionalParams
+         * @param array $part
+         * @return \StdClass 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getChannelByName($username, $optionalParams = false, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getChannelByName($username, $optionalParams, $part);
+        }
+        
+        /**
+         * 
+         *
+         * @param $id
+         * @param $optionalParams
+         * @param array $part
+         * @return \StdClass 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getChannelById($id, $optionalParams = false, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getChannelById($id, $optionalParams, $part);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $channelId
+         * @param array $optionalParams
+         * @param array $part
+         * @return array 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getPlaylistsByChannelId($channelId, $optionalParams = array(), $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getPlaylistsByChannelId($channelId, $optionalParams, $part);
+        }
+        
+        /**
+         * 
+         *
+         * @param $id
+         * @param $part
+         * @return \StdClass 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getPlaylistById($id, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getPlaylistById($id, $part);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $playlistId
+         * @param string $pageToken
+         * @param integer $maxResults
+         * @param array $part
+         * @return array 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getPlaylistItemsByPlaylistId($playlistId, $pageToken = '', $maxResults = 50, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getPlaylistItemsByPlaylistId($playlistId, $pageToken, $maxResults, $part);
+        }
+        
+        /**
+         * 
+         *
+         * @param $channelId
+         * @param array $part
+         * @param integer $maxResults
+         * @param $pageInfo
+         * @param $pageToken
+         * @return array 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getActivitiesByChannelId($channelId, $part = array(), $maxResults = 5, $pageInfo = false, $pageToken = '')
+        {
+            return \Alaouy\Youtube\Youtube::getActivitiesByChannelId($channelId, $part, $maxResults, $pageInfo, $pageToken);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $videoId
+         * @param integer $maxResults
+         * @param array $part
+         * @return array 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getRelatedVideos($videoId, $maxResults = 5, $part = array())
+        {
+            return \Alaouy\Youtube\Youtube::getRelatedVideos($videoId, $maxResults, $part);
+        }
+        
+        /**
+         * Parse a youtube URL to get the youtube Vid.
+         * 
+         * Support both full URL (www.youtube.com) and short URL (youtu.be)
+         *
+         * @param string $youtube_url
+         * @throws \Exception
+         * @return string Video Id
+         * @static 
+         */ 
+        public static function parseVIdFromURL($youtube_url)
+        {
+            return \Alaouy\Youtube\Youtube::parseVIdFromURL($youtube_url);
+        }
+        
+        /**
+         * Get the channel object by supplying the URL of the channel page
+         *
+         * @param string $youtube_url
+         * @throws \Exception
+         * @return object Channel object
+         * @static 
+         */ 
+        public static function getChannelFromURL($youtube_url)
+        {
+            return \Alaouy\Youtube\Youtube::getChannelFromURL($youtube_url);
+        }
+        
+        /**
+         * 
+         *
+         * @param $name
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getApi($name)
+        {
+            return \Alaouy\Youtube\Youtube::getApi($name);
+        }
+        
+        /**
+         * Decode the response from youtube, extract the single resource object.
+         * 
+         * (Don't use this to decode the response containing list of objects)
+         *
+         * @param string $apiData the api response from youtube
+         * @throws \Exception
+         * @return \StdClass an Youtube resource object
+         * @static 
+         */ 
+        public static function decodeSingle($apiData)
+        {
+            return \Alaouy\Youtube\Youtube::decodeSingle($apiData);
+        }
+        
+        /**
+         * Decode the response from youtube, extract the multiple resource object.
+         *
+         * @param string $apiData the api response from youtube
+         * @throws \Exception
+         * @return \StdClass an Youtube resource object
+         * @static 
+         */ 
+        public static function decodeMultiple($apiData)
+        {
+            return \Alaouy\Youtube\Youtube::decodeMultiple($apiData);
+        }
+        
+        /**
+         * Decode the response from youtube, extract the list of resource objects
+         *
+         * @param string $apiData response string from youtube
+         * @throws \Exception
+         * @return array Array of StdClass objects
+         * @static 
+         */ 
+        public static function decodeList($apiData)
+        {
+            return \Alaouy\Youtube\Youtube::decodeList($apiData);
+        }
+        
+        /**
+         * Using CURL to issue a GET request
+         *
+         * @param $url
+         * @param $params
+         * @return mixed 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function api_get($url, $params)
+        {
+            return \Alaouy\Youtube\Youtube::api_get($url, $params);
+        }
+        
+        /**
+         * Parse the input url string and return just the path part
+         *
+         * @param string $url the URL
+         * @return string the path string
+         * @static 
+         */ 
+        public static function _parse_url_path($url)
+        {
+            return \Alaouy\Youtube\Youtube::_parse_url_path($url);
+        }
+        
+        /**
+         * Parse the input url string and return an array of query params
+         *
+         * @param string $url the URL
+         * @return array array of query params
+         * @static 
+         */ 
+        public static function _parse_url_query($url)
+        {
+            return \Alaouy\Youtube\Youtube::_parse_url_query($url);
+        }
+         
+    }
+ 
+}
+
 namespace Barryvdh\Debugbar { 
 
     class Facade {
@@ -13041,6 +13431,434 @@ namespace Laravel\Socialite\Facades {
         {
             //Method inherited from \Illuminate\Support\Manager            
             return \Laravel\Socialite\SocialiteManager::getDrivers();
+        }
+         
+    }
+ 
+}
+
+namespace SammyK\LaravelFacebookSdk { 
+
+    class FacebookFacade {
+        
+        /**
+         * 
+         *
+         * @param array $config
+         * @return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk 
+         * @static 
+         */ 
+        public static function newInstance($config)
+        {
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::newInstance($config);
+        }
+        
+        /**
+         * Generate an OAuth 2.0 authorization URL for authentication.
+         *
+         * @param array $scope
+         * @param string $callback_url
+         * @return string 
+         * @static 
+         */ 
+        public static function getLoginUrl($scope = array(), $callback_url = '')
+        {
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getLoginUrl($scope, $callback_url);
+        }
+        
+        /**
+         * Generate a re-request authorization URL.
+         *
+         * @param array $scope
+         * @param string $callback_url
+         * @return string 
+         * @static 
+         */ 
+        public static function getReRequestUrl($scope, $callback_url = '')
+        {
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getReRequestUrl($scope, $callback_url);
+        }
+        
+        /**
+         * Generate a re-authentication authorization URL.
+         *
+         * @param array $scope
+         * @param string $callback_url
+         * @return string 
+         * @static 
+         */ 
+        public static function getReAuthenticationUrl($scope = array(), $callback_url = '')
+        {
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getReAuthenticationUrl($scope, $callback_url);
+        }
+        
+        /**
+         * Get an access token from a redirect.
+         *
+         * @param string $callback_url
+         * @return \Facebook\Authentication\AccessToken|null 
+         * @static 
+         */ 
+        public static function getAccessTokenFromRedirect($callback_url = '')
+        {
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getAccessTokenFromRedirect($callback_url);
+        }
+        
+        /**
+         * Returns the FacebookApp entity.
+         *
+         * @return \Facebook\FacebookApp 
+         * @static 
+         */ 
+        public static function getApp()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getApp();
+        }
+        
+        /**
+         * Returns the FacebookClient service.
+         *
+         * @return \Facebook\FacebookClient 
+         * @static 
+         */ 
+        public static function getClient()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getClient();
+        }
+        
+        /**
+         * Returns the OAuth 2.0 client service.
+         *
+         * @return \Facebook\OAuth2Client 
+         * @static 
+         */ 
+        public static function getOAuth2Client()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getOAuth2Client();
+        }
+        
+        /**
+         * Returns the last response returned from Graph.
+         *
+         * @return \Facebook\FacebookResponse|\Facebook\FacebookBatchResponse|null 
+         * @static 
+         */ 
+        public static function getLastResponse()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getLastResponse();
+        }
+        
+        /**
+         * Returns the URL detection handler.
+         *
+         * @return \Facebook\UrlDetectionInterface 
+         * @static 
+         */ 
+        public static function getUrlDetectionHandler()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getUrlDetectionHandler();
+        }
+        
+        /**
+         * Returns the default AccessToken entity.
+         *
+         * @return \Facebook\AccessToken|null 
+         * @static 
+         */ 
+        public static function getDefaultAccessToken()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getDefaultAccessToken();
+        }
+        
+        /**
+         * Sets the default access token to use with requests.
+         *
+         * @param \Facebook\AccessToken|string $accessToken The access token to save.
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function setDefaultAccessToken($accessToken)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::setDefaultAccessToken($accessToken);
+        }
+        
+        /**
+         * Returns the default Graph version.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDefaultGraphVersion()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getDefaultGraphVersion();
+        }
+        
+        /**
+         * Returns the redirect login helper.
+         *
+         * @return \Facebook\FacebookRedirectLoginHelper 
+         * @static 
+         */ 
+        public static function getRedirectLoginHelper()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getRedirectLoginHelper();
+        }
+        
+        /**
+         * Returns the JavaScript helper.
+         *
+         * @return \Facebook\FacebookJavaScriptHelper 
+         * @static 
+         */ 
+        public static function getJavaScriptHelper()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getJavaScriptHelper();
+        }
+        
+        /**
+         * Returns the canvas helper.
+         *
+         * @return \Facebook\FacebookCanvasHelper 
+         * @static 
+         */ 
+        public static function getCanvasHelper()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getCanvasHelper();
+        }
+        
+        /**
+         * Returns the page tab helper.
+         *
+         * @return \Facebook\FacebookPageTabHelper 
+         * @static 
+         */ 
+        public static function getPageTabHelper()
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getPageTabHelper();
+        }
+        
+        /**
+         * Sends a GET request to Graph and returns the result.
+         *
+         * @param string $endpoint
+         * @param \Facebook\AccessToken|string|null $accessToken
+         * @param string|null $eTag
+         * @param string|null $graphVersion
+         * @return \Facebook\FacebookResponse 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function get($endpoint, $accessToken = null, $eTag = null, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::get($endpoint, $accessToken, $eTag, $graphVersion);
+        }
+        
+        /**
+         * Sends a POST request to Graph and returns the result.
+         *
+         * @param string $endpoint
+         * @param array $params
+         * @param \Facebook\AccessToken|string|null $accessToken
+         * @param string|null $eTag
+         * @param string|null $graphVersion
+         * @return \Facebook\FacebookResponse 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function post($endpoint, $params = array(), $accessToken = null, $eTag = null, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::post($endpoint, $params, $accessToken, $eTag, $graphVersion);
+        }
+        
+        /**
+         * Sends a DELETE request to Graph and returns the result.
+         *
+         * @param string $endpoint
+         * @param array $params
+         * @param \Facebook\AccessToken|string|null $accessToken
+         * @param string|null $eTag
+         * @param string|null $graphVersion
+         * @return \Facebook\FacebookResponse 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function delete($endpoint, $params = array(), $accessToken = null, $eTag = null, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::delete($endpoint, $params, $accessToken, $eTag, $graphVersion);
+        }
+        
+        /**
+         * Sends a request to Graph for the next page of results.
+         *
+         * @param \Facebook\GraphEdge $graphEdge The GraphEdge to paginate over.
+         * @return \Facebook\GraphEdge|null 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function next($graphEdge)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::next($graphEdge);
+        }
+        
+        /**
+         * Sends a request to Graph for the previous page of results.
+         *
+         * @param \Facebook\GraphEdge $graphEdge The GraphEdge to paginate over.
+         * @return \Facebook\GraphEdge|null 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function previous($graphEdge)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::previous($graphEdge);
+        }
+        
+        /**
+         * Sends a request to Graph for the next page of results.
+         *
+         * @param \Facebook\GraphEdge $graphEdge The GraphEdge to paginate over.
+         * @param string $direction The direction of the pagination: next|previous.
+         * @return \Facebook\GraphEdge|null 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function getPaginationResults($graphEdge, $direction)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::getPaginationResults($graphEdge, $direction);
+        }
+        
+        /**
+         * Sends a request to Graph and returns the result.
+         *
+         * @param string $method
+         * @param string $endpoint
+         * @param array $params
+         * @param \Facebook\AccessToken|string|null $accessToken
+         * @param string|null $eTag
+         * @param string|null $graphVersion
+         * @return \Facebook\FacebookResponse 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function sendRequest($method, $endpoint, $params = array(), $accessToken = null, $eTag = null, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::sendRequest($method, $endpoint, $params, $accessToken, $eTag, $graphVersion);
+        }
+        
+        /**
+         * Sends a batched request to Graph and returns the result.
+         *
+         * @param array $requests
+         * @param \Facebook\AccessToken|string|null $accessToken
+         * @param string|null $graphVersion
+         * @return \Facebook\FacebookBatchResponse 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function sendBatchRequest($requests, $accessToken = null, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::sendBatchRequest($requests, $accessToken, $graphVersion);
+        }
+        
+        /**
+         * Instantiates an empty FacebookBatchRequest entity.
+         *
+         * @param \Facebook\AccessToken|string|null $accessToken The top-level access token. Requests with no access token
+         *                                               will fallback to this.
+         * @param string|null $graphVersion The Graph API version to use.
+         * @return \Facebook\FacebookBatchRequest 
+         * @static 
+         */ 
+        public static function newBatchRequest($accessToken = null, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::newBatchRequest($accessToken, $graphVersion);
+        }
+        
+        /**
+         * Instantiates a new FacebookRequest entity.
+         *
+         * @param string $method
+         * @param string $endpoint
+         * @param array $params
+         * @param \Facebook\AccessToken|string|null $accessToken
+         * @param string|null $eTag
+         * @param string|null $graphVersion
+         * @return \Facebook\FacebookRequest 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function request($method, $endpoint, $params = array(), $accessToken = null, $eTag = null, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::request($method, $endpoint, $params, $accessToken, $eTag, $graphVersion);
+        }
+        
+        /**
+         * Factory to create FacebookFile's.
+         *
+         * @param string $pathToFile
+         * @return \Facebook\FacebookFile 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function fileToUpload($pathToFile)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::fileToUpload($pathToFile);
+        }
+        
+        /**
+         * Factory to create FacebookVideo's.
+         *
+         * @param string $pathToFile
+         * @return \Facebook\FacebookVideo 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function videoToUpload($pathToFile)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::videoToUpload($pathToFile);
+        }
+        
+        /**
+         * Upload a video in chunks.
+         *
+         * @param int $target The id of the target node before the /videos edge.
+         * @param string $pathToFile The full path to the file.
+         * @param array $metadata The metadata associated with the video file.
+         * @param string|null $accessToken The access token.
+         * @param int $maxTransferTries The max times to retry a failed upload chunk.
+         * @param string|null $graphVersion The Graph API version to use.
+         * @return array 
+         * @throws FacebookSDKException
+         * @static 
+         */ 
+        public static function uploadVideo($target, $pathToFile, $metadata = array(), $accessToken = null, $maxTransferTries = 5, $graphVersion = null)
+        {
+            //Method inherited from \Facebook\Facebook            
+            return \SammyK\LaravelFacebookSdk\LaravelFacebookSdk::uploadVideo($target, $pathToFile, $metadata, $accessToken, $maxTransferTries, $graphVersion);
         }
          
     }
@@ -15284,9 +16102,13 @@ namespace  {
 
     class View extends \Illuminate\Support\Facades\View {}
 
+    class Youtube extends \Alaouy\Youtube\Facades\Youtube {}
+
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 
     class Socialite extends \Laravel\Socialite\Facades\Socialite {}
+
+    class Facebook extends \SammyK\LaravelFacebookSdk\FacebookFacade {}
  
 }
 

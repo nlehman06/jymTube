@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\StreamingServices\FacebookService;
+use App\StreamingServices\StreamingService;
+use App\StreamingServices\StreamingServiceInterface;
+use App\StreamingServices\YouTubeService;
 use App\Video;
-use function env;
-use Exception;
-use Facebook\Exceptions\FacebookSDKException;
+use function class_exists;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
-use function url;
+use function strpos;
 use function view;
 
 class VideoController extends Controller {
@@ -90,57 +91,59 @@ class VideoController extends Controller {
         //
     }
 
-    public function checkURL(Request $request, LaravelFacebookSdk $fb)
+    public function checkURL(Request $request)
     {
         $data = $request->validate(['url' => 'required']);
 
-        $error_data = [
-            'message'               => "We couldn't find this video on Facebook",
-            'message_from_provider' => '',
-            'other_info'            => ''
-        ];
+        $provider = $this->determineProvider($url = $data['url']);
 
-        preg_match("#(\d+)/$#", $data['url'], $vid);
-
-        if (!count($vid))
+        if (!class_exists($provider))
         {
-            $error_data['other_info'] = "No id found";
+            $error_data['message'] = "We couldn't determine the provider from the given URL";
+            $error_data['other_info'] = "As of right now, we only support videos from Facebook or YouTube.";
 
             return Response::json(['success' => false, 'error_data' => $error_data], 302);
         }
 
-        try
-        {
-            $response = $fb->sendRequest(
-                'GET',
-                '/' . $vid[1],
-                [
-                    'fields' => 'title,content_tags,created_time,custom_labels,description,from{id,name,picture},length,permalink_url,picture,source'
-                ],
-                env('FACEBOOK_ACCESS_TOKEN'))->getGraphNode();
+        /** @var StreamingService $videoService */
+        $videoService = new StreamingService(new $provider);
 
-            $url_data = [
-                'provider'      => 'facebook',
-                'provider_id'   => $response->getField('id'),
-                'title'         => $response->getField('title'),
-                'description'   => $response->getField('description'),
-                'permalink_url' => $response->getField('permalink_url'),
-                'length'        => $response->getField('length'),
-                'picture'       => $response->getField('picture'),
-                'created_time'  => $response->getField('created_time')->format('Y-m-d H:i:s'),
-                'from_id'       => $response->getField('from')->getField('id'),
-                'from_name'     => $response->getField('from')->getField('name'),
-                'from_profile'  => $response->getField('from')->getField('picture')->getField('url'),
-                'content_tags'  => $response->getField('content_tags'),
-                'custom_labels' => $response->getField('custom_labels')
-            ];
-        } catch (FacebookSDKException $e)
-        {
-            $error_data['message_from_provider'] = $e->getMessage();
+        $videoService->process($url);
 
-            return Response::json(['success' => false, 'error_data' => $error_data], 302);
+        if ($videoService->hasErrors())
+        {
+            return Response::json(['success' => false, 'error_data' => $videoService->errorData], 302);
         }
 
-        return Response::json(['success' => true, 'url_data' => $url_data], 201, [], JSON_NUMERIC_CHECK);
+        return Response::json(['success' => true, 'url_data' => $videoService->urlData], 201);
+
+    }
+
+    /**
+     * @param $url
+     * @return null|string
+     */
+    private function determineProvider($url)
+    {
+        $youTubeUrls = ['youtube.com', 'youtu.be'];
+        $facebookUrls = ['facebook.com'];
+
+        foreach ($youTubeUrls as $youTubeUrl)
+        {
+            if (strpos($url, $youTubeUrl) !== false)
+            {
+                return YouTubeService::class;
+            }
+        }
+
+        foreach ($facebookUrls as $facebookUrl)
+        {
+            if (strpos($url, $facebookUrl) !== false)
+            {
+                return FacebookService::class;
+            }
+        }
+
+        return null;
     }
 }

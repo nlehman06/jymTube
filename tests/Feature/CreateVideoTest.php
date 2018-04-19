@@ -49,7 +49,6 @@ class CreateVideoTest extends TestCase {
 
         $this->actingAs($this->normalUser, 'api')
             ->post(route('checkURL'), ['url' => $url])
-            ->assertStatus(201)
             ->assertJson([
                 'success'  => true,
                 'url_data' => [
@@ -69,20 +68,20 @@ class CreateVideoTest extends TestCase {
             ->assertJson([
                 'success'    => false,
                 'error_data' => [
-                    'message' => "We couldn't find this video on Facebook"
+                    'message' => "We couldn't find the video from Facebook"
                 ]
             ]);
     }
 
     /** @test */
-    public function error_message_is_returned_if_no_id_could_be_found()
+    public function error_message_is_returned_if_no_facebook_id_could_be_found()
     {
         $this->actingAs($this->normalUser, 'api')
             ->post(route('checkURL'), ['url' => 'https://www.facebook.com/someone/videos/'])
             ->assertJson([
                 'success'    => false,
                 'error_data' => [
-                    'message'               => "We couldn't find this video on Facebook",
+                    'message'               => "We couldn't find the video from Facebook",
                     'message_from_provider' => '',
                     'other_info'            => 'No id found'
                 ]
@@ -97,5 +96,38 @@ class CreateVideoTest extends TestCase {
             ->post(route('checkURL'), ['url' => ''])
             ->assertStatus(302)
             ->assertSessionHasErrors('url');
+    }
+
+    /** @test */
+    public function user_may_check_a_youtube_url()
+    {
+        $url = 'https://youtu.be/2P4VozzF9tw';
+
+        $this->actingAs($this->normalUser)
+            ->post(route('checkURL'), ['url' => $url])
+            ->assertJson([
+                'success'  => true,
+                'url_data' => [
+                    'provider'    => 'youtube',
+                    'provider_id' => '2P4VozzF9tw',
+                    'title'       => 'IF tip for those who don’t train at same time every day'
+                ]
+            ]);
+    }
+
+
+    /** @test */
+    public function error_message_is_returned_if_no_youtube_id_could_be_found()
+    {
+        $this->actingAs($this->normalUser, 'api')
+            ->post(route('checkURL'), ['url' => 'https://youtu.be/2P4'])
+            ->assertJson([
+                'success'    => false,
+                'error_data' => [
+                    'message'               => "We couldn't find the video from YouTube",
+                    'message_from_provider' => '',
+                    'other_info'            => "Can't find this video using ID: 2P4"
+                ]
+            ]);
     }
 }
