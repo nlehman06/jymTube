@@ -55,4 +55,9 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
+    public function submittedVideos()
+    {
+        return $this->hasMany(Video::class, 'submitted_by_user_id');
+    }
+
 }

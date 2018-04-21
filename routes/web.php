@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/addVideo', 'VideoController@create')->middleware('auth')->name('addVideo');
 
 Route::post('/api/addVideo/checkURL', 'VideoController@checkURL')->name('checkURL');
+Route::post('/api/addVideo', 'VideoController@store')->name('storeVideoForReview');
 
 // OAuth Routes
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');

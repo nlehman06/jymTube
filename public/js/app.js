@@ -38214,17 +38214,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         urlData: {}
     },
+    data: function data() {
+        return {
+            loading: false,
+            submitButtonText: 'Send Video for Review',
+            showThankYou: false
+        };
+    },
+
     computed: {
         showFoundData: function showFoundData() {
             return Object.keys(this.urlData).length !== 0;
         },
         videoCreatedOn: function videoCreatedOn() {
             return moment(this.urlData.created_on).format('MMMM Do YYYY, h:mm a');
+        }
+    },
+    methods: {
+        submitVideoForReview: function submitVideoForReview() {
+            var _this = this;
+
+            this.loading = true;
+            this.submitButtonText = 'Please Wait...';
+
+            axios.post('/api/addVideo', this.urlData).then(function () {
+                _this.loading = false;
+                _this.showThankYou = true;
+            });
         }
     }
 });
@@ -38314,7 +38346,83 @@ var render = function() {
                           )
                         ])
                       ])
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "mx-auto mt-8 flex items-center flex-col"
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.showThankYou,
+                                expression: "!showThankYou"
+                              }
+                            ],
+                            staticClass: "btn btn-orange",
+                            attrs: {
+                              id: "submitVideoForReviewButton",
+                              type: "button",
+                              disabled: _vm.loading
+                            },
+                            on: { click: _vm.submitVideoForReview }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.submitButtonText) +
+                                "\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.showThankYou,
+                                expression: "showThankYou"
+                              }
+                            ]
+                          },
+                          [
+                            _vm._v(
+                              "Thank you for your help in adding mass to Jym Tube!"
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.showThankYou,
+                                expression: "showThankYou"
+                              }
+                            ],
+                            staticClass: "btn btn-orange",
+                            attrs: { href: "/home", id: "continueToHome" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Continue to GSD!\n                        "
+                            )
+                          ]
+                        )
+                      ]
+                    )
                   ]
                 )
               ])

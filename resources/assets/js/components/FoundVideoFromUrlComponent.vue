@@ -26,6 +26,17 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="mx-auto mt-8 flex items-center flex-col">
+                            <button class="btn btn-orange" id="submitVideoForReviewButton" type="button"
+                                    :disabled="loading" @click="submitVideoForReview" v-show="!showThankYou">
+                                {{ submitButtonText }}
+                            </button>
+                            <p v-show="showThankYou">Thank you for your help in adding mass to Jym Tube!</p>
+
+                            <a href="/home" class="btn btn-orange" id="continueToHome" v-show="showThankYou">
+                                Continue to GSD!
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,6 +49,13 @@
         props:    {
             urlData: {},
         },
+        data() {
+            return {
+                loading:          false,
+                submitButtonText: 'Send Video for Review',
+                showThankYou:     false
+            }
+        },
         computed: {
             showFoundData:  function () {
                 return Object.keys(this.urlData).length !== 0
@@ -45,6 +63,18 @@
             videoCreatedOn: function () {
                 return moment(this.urlData.created_on).format('MMMM Do YYYY, h:mm a');
             }
-        }
+        },
+        methods:  {
+            submitVideoForReview() {
+                this.loading = true;
+                this.submitButtonText = 'Please Wait...';
+
+                axios.post('/api/addVideo', this.urlData)
+                    .then(() => {
+                        this.loading = false;
+                        this.showThankYou = true;
+                    })
+            }
+        },
     }
 </script>

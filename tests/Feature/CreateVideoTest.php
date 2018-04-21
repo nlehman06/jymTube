@@ -115,7 +115,6 @@ class CreateVideoTest extends TestCase {
             ]);
     }
 
-
     /** @test */
     public function error_message_is_returned_if_no_youtube_id_could_be_found()
     {
@@ -128,6 +127,42 @@ class CreateVideoTest extends TestCase {
                     'message_from_provider' => '',
                     'other_info'            => "Can't find this video using ID: 2P4"
                 ]
+            ]);
+    }
+
+    /** @test */
+    public function a_user_may_submit_a_found_video_for_review()
+    {
+        $video = factory('App\Video')->make();
+
+        $this->actingAs($this->normalUser)
+            ->post(route('storeVideoForReview'), $video->toArray())
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas('videos', [
+            'provider_id'          => $video->provider_id,
+            'submitted_by_user_id' => $this->normalUser->id
+        ]);
+    }
+
+    /** @test */
+    public function submitting_a_video_requires_all_url_data_fields()
+    {
+        $this->actingAs($this->normalUser)
+            ->withExceptionHandling()
+            ->postJson(route('storeVideoForReview'), [])
+            ->assertJsonValidationErrors([
+                'provider_id',
+                'provider',
+                'title',
+                'description',
+                'permalink_url',
+                'length',
+                'picture',
+                'created_time',
+                'from_id',
+                'from_name',
+                'from_profile'
             ]);
     }
 }

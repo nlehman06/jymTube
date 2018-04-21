@@ -38,12 +38,29 @@ class VideoController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $data = request()->validate([
+            'provider'      => 'required',
+            'provider_id'   => 'required',
+            'title'         => 'required',
+            'description'   => 'required',
+            'permalink_url' => 'required|url',
+            'length'        => 'required|date_format:"H:i:s"',
+            'picture'       => 'required|url',
+            'created_time'  => 'required|date_format:"Y-m-d H:i:s"',
+            'from_id'       => 'required',
+            'from_name'     => 'required',
+            'from_profile'  => 'required|url'
+        ]);
+
+        $data['submitted_date'] = now();
+
+        auth()->user()->submittedVideos()->create($data);
+
+        return Response::json([], 201);
     }
 
     /**

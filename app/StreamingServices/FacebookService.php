@@ -91,8 +91,8 @@ class FacebookService implements StreamingServiceInterface {
                 'provider_id'   => $response->getField('id'),
                 'title'         => $response->getField('title'),
                 'description'   => $response->getField('description'),
-                'permalink_url' => $response->getField('permalink_url'),
-                'length'        => $response->getField('length'),
+                'permalink_url' => 'https://www.facebook.com/' . $response->getField('permalink_url'),
+                'length'        => $this->convertTime($response->getField('length')),
                 'picture'       => $response->getField('picture'),
                 'created_time'  => $response->getField('created_time')->format('Y-m-d H:i:s'),
                 'from_id'       => $response->getField('from')->getField('id'),
@@ -110,5 +110,12 @@ class FacebookService implements StreamingServiceInterface {
 
         return $urlData;
 
+    }
+
+    private function convertTime($seconds)
+    {
+        $t = round($seconds);
+
+        return sprintf('%02d:%02d:%02d', ($t / 3600), ($t / 60 % 60), $t % 60);
     }
 }
