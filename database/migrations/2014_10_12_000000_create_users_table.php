@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
-{
+class CreateUsersTable extends Migration {
+
     /**
      * Run the migrations.
      *
@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('nickName')->nullable();
             $table->string('email')->nullable();
             $table->string('password')->nullable();
-            $table->string('provider');
-            $table->string('provider_id')->unique();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable()->unique();
             $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();

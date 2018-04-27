@@ -29,7 +29,10 @@ class StreamingService {
         $videoId = $this->provider->getIdFromUrl($url);
 
         if ($videoId)
-            $this->urlData = $this->provider->getDataFromProvider($videoId);
+        {
+            if ($this->provider->checkOriginality($videoId))
+                $this->urlData = $this->provider->getDataFromProvider($videoId);
+        }
 
         $this->errorData = $this->provider->getErrorData();
     }

@@ -30,4 +30,11 @@ interface StreamingServiceInterface {
      * @return array
      */
     public function getDataFromProvider($videoId);
+
+    /**
+     * Make sure there isn't anything already in the database matching this video
+     * @param $videoId
+     * @return mixed
+     */
+    public function checkOriginality($videoId);
 }

@@ -88,7 +88,7 @@ describe('AddVideo', () => {
         })
     });
 
-    it.only('allows the user to submit a found video for review', (done) => {
+    it('allows the user to submit a found video for review', (done) => {
 
         wrapper.vm.responseData.urlData = {
             content_tags:  null,

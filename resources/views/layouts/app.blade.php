@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'JymTube') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -21,7 +21,9 @@
 
         <div class="container mx-auto">
             <div class="flex items-center justify-between flex-no-wrap">
-                <div class="font-title text-orange-dark flex-none mr-6 w-1/4 text-3xl">JymTube</div>
+                <div class="font-title flex-none mr-6 w-1/4 text-3xl">
+                    <a href="/" class="text-orange-dark no-underline">JymTube</a>
+                </div>
                 <div class="text-white flex-grow">
                     <div class="relative">
                         <input type="text" placeholder="IMPROVE YOURSELF"
@@ -34,11 +36,17 @@
                 @auth
                     <div class="text-orange-darker flex-none w-1/4 flex justify-center items-center">
                         <img src="{{ auth()->user()->avatar }}" class="rounded-full mr-3">
-                        <span class="text-lg">{{ auth()->user()->nickName }}</span>
+                        <span class="text-lg">{{ auth()->user()->nickName ?? auth()->user()->username }}</span>
                     </div>
                 @endauth
                 @guest
-                    <div></div>
+                    <a href="{{ route('register') }}"
+                       class="px-4 font-title font-bold text-lg no-underline text-grey-darker ml-8">
+                        Sign Up
+                    </a>
+                    <a href="{{ route('login') }}" class="px-4 font-title font-bold text-lg text-orange no-underline">
+                        Sign In
+                    </a>
                 @endguest
             </div>
         </div>

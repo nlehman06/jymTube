@@ -131,6 +131,22 @@ class CreateVideoTest extends TestCase {
     }
 
     /** @test */
+    public function error_message_is_returned_if_video_is_already_in_the_database()
+    {
+        $video1 = factory('App\Video')->create([
+            'provider'      => 'youtube',
+            'provider_id'   => '2P4VozzF9tw',
+            'permalink_url' => 'https://youtu.be/2P4VozzF9tw'
+        ]);
+
+        $this->actingAs($this->normalUser)
+            ->withExceptionHandling()
+            ->post(route('checkURL'), ['url' => $video1->permalink_url])
+            ->assertJsonFragment(['success' => false])
+            ->assertJsonFragment(['other_info' => 'This video has already been submitted.']);
+    }
+
+    /** @test */
     public function a_user_may_submit_a_found_video_for_review()
     {
         $video = factory('App\Video')->make();
@@ -141,7 +157,8 @@ class CreateVideoTest extends TestCase {
 
         $this->assertDatabaseHas('videos', [
             'provider_id'          => $video->provider_id,
-            'submitted_by_user_id' => $this->normalUser->id
+            'submitted_by_user_id' => $this->normalUser->id,
+            'status'               => 'submitted'
         ]);
     }
 

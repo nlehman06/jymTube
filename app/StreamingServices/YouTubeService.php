@@ -4,6 +4,7 @@
 namespace App\StreamingServices;
 
 
+use App\Video;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
@@ -27,7 +28,6 @@ class YouTubeService implements StreamingServiceInterface {
         $this->urlData = [];
         $this->errorsExist = false;
     }
-
 
     /**
      * Checks if the processing of the url has caused any errors
@@ -63,6 +63,7 @@ class YouTubeService implements StreamingServiceInterface {
             $this->errorData['other_info'] = $e->getMessage();
             $this->errorsExist = true;
         }
+
         return $videoId;
     }
 
@@ -78,7 +79,7 @@ class YouTubeService implements StreamingServiceInterface {
         try
         {
             $video = Youtube::getVideoInfo($videoId);
-            if($video)
+            if ($video)
             {
                 $channel = Youtube::getChannelById($video->snippet->channelId);
                 $urlData = [
@@ -96,8 +97,9 @@ class YouTubeService implements StreamingServiceInterface {
                     'content_tags'  => '',
                     'custom_labels' => ''
                 ];
-            } else {
-                $this->errorData['other_info'] = "Can't find this video using ID: " .$videoId;
+            } else
+            {
+                $this->errorData['other_info'] = "Can't find this video using ID: " . $videoId;
                 $this->errorsExist = true;
             }
         } catch (Exception $e)
@@ -107,6 +109,27 @@ class YouTubeService implements StreamingServiceInterface {
         }
 
         return $urlData;
+    }
+
+    /**
+     * Make sure there isn't anything already in the database matching this video
+     * @param $videoId
+     * @return mixed
+     */
+    public function checkOriginality($videoId)
+    {
+        $videoExists = Video::whereProvider('youtube')
+            ->whereProviderId($videoId)
+            ->exists();
+        if ($videoExists)
+        {
+            $this->errorsExist = true;
+            $this->errorData['other_info'] = "This video has already been submitted.";
+
+            return false;
+        }
+
+        return true;
     }
 
     private function convertTime($youtube_time)

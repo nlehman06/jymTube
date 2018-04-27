@@ -28,6 +28,7 @@ class CreateVideosTable extends Migration {
             $table->string('from_profile');
             $table->integer('submitted_by_user_id')->index();
             $table->dateTime('submitted_date');
+            $table->string('status');
             $table->timestamps();
         });
     }

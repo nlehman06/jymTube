@@ -57,6 +57,7 @@ class VideoController extends Controller {
         ]);
 
         $data['submitted_date'] = now();
+        $data['status'] = 'submitted';
 
         auth()->user()->submittedVideos()->create($data);
 

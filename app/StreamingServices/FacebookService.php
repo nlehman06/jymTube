@@ -2,6 +2,7 @@
 
 namespace App\StreamingServices;
 
+use App\Video;
 use Facebook\Exceptions\FacebookSDKException;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 
@@ -12,7 +13,6 @@ class FacebookService implements StreamingServiceInterface {
      * @var LaravelFacebookSdk
      */
     private $fb;
-
 
     /**
      * FacebookService constructor.
@@ -110,6 +110,27 @@ class FacebookService implements StreamingServiceInterface {
 
         return $urlData;
 
+    }
+
+    /**
+     * Make sure there isn't anything already in the database matching this video
+     * @param $videoId
+     * @return mixed
+     */
+    public function checkOriginality($videoId)
+    {
+        $videoExists = Video::whereProvider('facebook')
+            ->whereProviderId($videoId)
+            ->exists();
+        if ($videoExists)
+        {
+            $this->errorsExist = true;
+            $this->errorData['other_info'] = "This video has already been submitted.";
+
+            return false;
+        }
+
+        return true;
     }
 
     private function convertTime($seconds)
