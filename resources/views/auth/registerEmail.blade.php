@@ -2,22 +2,18 @@
 
 @section('content')
 
+
     <div class="container mx-auto h-full flex justify-center items-center">
-        <div class="w-1/3">
-            <h1 class="font-title font-hairline mb-6 text-center">{{ __('Reset Password') }}</h1>
+        <div class="w-3/4 lg:w-1/2">
+            <h1 class="font-title font-hairline mb-6 text-center">Register Email</h1>
             <div class="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('password.email') }}">
+                <form method="POST" action="{{ route('register.email.store') }}">
                     @csrf
-
+                    <p class="my-8">
+                        Ok, we just need your email address and you're all good.
+                    </p>
                     <div class="mb-4">
-                        <label for="email"
-                               class="font-bold text-grey-darker block mb-2">{{ __('E-Mail Address') }}</label>
+                        <label class="font-bold text-grey-darker block mb-2">{{ __('E-Mail Address') }}</label>
                         <input id="email" type="email"
                                class="input-text {{ $errors->has('email') ? ' border-red' : '' }}"
                                name="email" value="{{ old('email') }}" required autofocus>
@@ -31,12 +27,11 @@
 
                     <div class="flex items-center justify-between">
                         <button type="submit" class="btn btn-orange">
-                            {{ __('Send Password Reset Link') }}
+                            {{ __('Register') }}
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 @endsection

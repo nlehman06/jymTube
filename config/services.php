@@ -38,13 +38,13 @@ return [
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => 'http://jymtube.test/auth/twitter/callback'
+        'redirect' => 'https://jymtube.test/auth/twitter/callback'
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'http://jymtube.test/auth/facebook/callback'
+        'redirect' => 'https://jymtube.test/auth/facebook/callback'
     ],
 
 ];

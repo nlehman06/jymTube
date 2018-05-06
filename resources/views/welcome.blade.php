@@ -33,10 +33,10 @@
             @endauth
             @guest
                 <a href="{{ route('register') }}"
-                   class="px-4 font-title font-bold text-lg no-underline text-grey-darker ml-8">
+                   class="px-4 font-title font-bold text-lg no-underline text-grey-darker ml-8 whitespace-no-wrap">
                     Sign Up
                 </a>
-                <a href="{{ route('login') }}" class="px-4 font-title font-bold text-lg text-orange no-underline">
+                <a href="{{ route('login') }}" class="px-4 font-title font-bold text-lg text-orange no-underline whitespace-no-wrap">
                     Sign In
                 </a>
             @endguest

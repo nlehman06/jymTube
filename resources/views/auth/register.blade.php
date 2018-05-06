@@ -9,25 +9,9 @@
                     @csrf
 
                     <div class="mb-4 flex flex-col items-center justify-center">
-                        <a href="{{ url('/auth/twitter') }}" class="btn w-full text-white bg-orange-light">
-                            Twitter
-                        </a>
                         <a href="{{ url('/auth/facebook') }}" class="btn w-full text-white bg-orange-light">
                             Facebook
                         </a>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="font-bold text-grey-darker block mb-2">Username</label>
-                        <input id="username" type="text"
-                               class="input-text {{ $errors->has('username') ? ' border-red' : '' }}"
-                               name="username" value="{{ old('username') }}" required autofocus>
-
-                        @if ($errors->has('username'))
-                            <span class="text-red-dark">
-                                <strong>{{ $errors->first('username') }}</strong>
-                            </span>
-                        @endif
                     </div>
 
                     <div class="mb-4">

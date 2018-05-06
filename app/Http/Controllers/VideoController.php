@@ -109,7 +109,7 @@ class VideoController extends Controller {
         //
     }
 
-    public function checkURL(Request $request)
+    public function  checkURL(Request $request)
     {
         $data = $request->validate(['url' => 'required']);
 

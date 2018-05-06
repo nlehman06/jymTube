@@ -24,6 +24,14 @@ Route::get('/addVideo', 'VideoController@create')->middleware('auth')->name('add
 Route::post('/api/addVideo/checkURL', 'VideoController@checkURL')->name('checkURL');
 Route::post('/api/addVideo', 'VideoController@store')->name('storeVideoForReview');
 
+Route::get('register-email', 'RegisterEmailController@edit')->name('register.email.edit');
+Route::post('register-email', 'RegisterEmailController@store')->name('register.email.store');
+Route::get('resend', 'RegisterEmailController@resend')->name('register.email.resend');
+Route::get('congrats', 'RegisterEmailController@congrats')->name('activate.congrats');
+Route::get('rememberToActivate', 'RegisterEmailController@rememberToActivate')->name('activate.reminder');
+
+Route::get('verify-user/{code}', 'RegisterEmailController@activateUser')->name('activate.user');
+
 // OAuth Routes
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');

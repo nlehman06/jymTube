@@ -10,9 +10,6 @@
                     @csrf
 
                     <div class="mb-4 flex flex-col items-center justify-center">
-                        <a href="{{ url('/auth/twitter') }}" class="btn w-full text-white bg-orange-light">
-                            Twitter
-                        </a>
                         <a href="{{ url('/auth/facebook') }}" class="btn w-full text-white bg-orange-light">
                             Facebook
                         </a>

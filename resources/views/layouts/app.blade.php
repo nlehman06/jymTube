@@ -35,16 +35,16 @@
                 </div>
                 @auth
                     <div class="text-orange-darker flex-none w-1/4 flex justify-center items-center">
-                        <img src="{{ auth()->user()->avatar }}" class="rounded-full mr-3">
+                        <img src="{{ auth()->user()->avatar }}" class="rounded-full mr-3 w-10">
                         <span class="text-lg">{{ auth()->user()->nickName ?? auth()->user()->username }}</span>
                     </div>
                 @endauth
                 @guest
                     <a href="{{ route('register') }}"
-                       class="px-4 font-title font-bold text-lg no-underline text-grey-darker ml-8">
+                       class="px-4 font-title font-bold text-lg no-underline text-grey-darker ml-8 whitespace-no-wrap">
                         Sign Up
                     </a>
-                    <a href="{{ route('login') }}" class="px-4 font-title font-bold text-lg text-orange no-underline">
+                    <a href="{{ route('login') }}" class="px-4 font-title font-bold text-lg text-orange no-underline whitespace-no-wrap">
                         Sign In
                     </a>
                 @endguest

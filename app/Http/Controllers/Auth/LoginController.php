@@ -83,13 +83,29 @@ class LoginController extends Controller {
             return $authUser;
         }
 
+        // If a user account already exists for this email, then merge
+        $emailUser = User::where('email', $user->getEmail())->first();
+        if ($emailUser)
+        {
+            $emailUser->update([
+                'nickName'    => $emailUser->nickName ?? $user->getNickname() ?? $user->getName(),
+                'provider'    => $provider,
+                'provider_id' => $user->getId(),
+                'avatar'      => $user->getAvatar(),
+                'status'      => 1
+            ]);
+
+            return $emailUser;
+        }
+
         return User::create([
-            'username'    => $user->getName(),
-            'nickName'    => $user->getNickname(),
+            'nickName'    => $user->getNickname() ?? $user->getName(),
             'email'       => $user->getEmail(),
             'provider'    => $provider,
             'provider_id' => $user->getId(),
-            'avatar'      => $user->getAvatar()
+            'avatar'      => $user->getAvatar(),
+            'status'      => 1
         ]);
     }
+
 }
