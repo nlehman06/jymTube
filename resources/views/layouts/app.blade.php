@@ -17,40 +17,8 @@
 <body class="bg-grey-lightest font-body text-orange-darkest min-h-screen">
 <div id="app">
 
-    <nav class="flex bg-grey-lightest p-3 shadow">
-
-        <div class="container mx-auto">
-            <div class="flex items-center justify-between flex-no-wrap">
-                <div class="font-title flex-none mr-6 w-1/4 text-3xl">
-                    <a href="/" class="text-orange-dark no-underline">JymTube</a>
-                </div>
-                <div class="text-white flex-grow">
-                    <div class="relative">
-                        <input type="text" placeholder="IMPROVE YOURSELF"
-                               class="w-full rounded shadow appearance-none border font-title text-orange-darkest bg-orange-lightest text-xl pl-3 py-2 pr-10">
-                        <button class="btn btn-orange absolute pin-t pin-r mt-px mr-px text-xl">
-                            Search
-                        </button>
-                    </div>
-                </div>
-                @auth
-                    <div class="text-orange-darker flex-none w-1/4 flex justify-center items-center">
-                        <img src="{{ auth()->user()->avatar }}" class="rounded-full mr-3 w-10">
-                        <span class="text-lg">{{ auth()->user()->nickName ?? auth()->user()->username }}</span>
-                    </div>
-                @endauth
-                @guest
-                    <a href="{{ route('register') }}"
-                       class="px-4 font-title font-bold text-lg no-underline text-grey-darker ml-8 whitespace-no-wrap">
-                        Sign Up
-                    </a>
-                    <a href="{{ route('login') }}" class="px-4 font-title font-bold text-lg text-orange no-underline whitespace-no-wrap">
-                        Sign In
-                    </a>
-                @endguest
-            </div>
-        </div>
-    </nav>
+    <nav-bar auth="{{ Auth::check() }}" user="{{ auth()->user() }}" register-route="{{ route('register') }}"
+             login-route="{{ route('login') }}" logout-route="{{ route('logout') }}"></nav-bar>
 
     <main class="py-4 container mx-auto">
         @yield('content')

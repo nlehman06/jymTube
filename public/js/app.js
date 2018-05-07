@@ -1104,7 +1104,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(56);
+module.exports = __webpack_require__(59);
 
 
 /***/ }),
@@ -1128,6 +1128,7 @@ window.Vue = __webpack_require__(36);
  */
 
 Vue.component('add-video', __webpack_require__(39));
+Vue.component('nav-bar', __webpack_require__(56));
 /*Vue.component('check-url', require('./components/CheckUrlComponent.vue'));
 Vue.component('found-video-from-url', require('./components/FoundVideoFromUrlComponent.vue'));
 Vue.component('url-not-found', require('./components/UrlNotFoundComponent.vue'));*/
@@ -38669,6 +38670,399 @@ if (false) {
 
 /***/ }),
 /* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(57)
+/* template */
+var __vue_template__ = __webpack_require__(58)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/NavBarComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-28e9d386", Component.options)
+  } else {
+    hotAPI.reload("data-v-28e9d386", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            open: false,
+            dropDownOpen: false,
+            user: {}
+        };
+    },
+
+    props: ['auth', 'registerRoute', 'loginRoute', 'logoutRoute'],
+    methods: {
+        toggle: function toggle() {
+            this.open = !this.open;
+        },
+        togglePullDownMenu: function togglePullDownMenu() {
+            this.dropDownOpen = !this.dropDownOpen;
+        },
+        logout: function logout() {
+            var _this = this;
+
+            axios.post(this.logoutRoute).then(function () {
+                window.location.href = _this.loginRoute;
+            });
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        if (this.auth) {
+            axios.get('/api/getAccount').then(function (_ref) {
+                var data = _ref.data;
+
+                _this2.user = data.user;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("nav", { staticClass: "bg-grey-lightest p-3 shadow" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "flex items-center justify-between flex-wrap sm:flex-no-wrap"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "block sm:hidden" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "flex items-center px-3 py-2 border rounded text-orange border-orange hover:text-orange-light hover:border-orange-light",
+                on: { click: _vm.toggle }
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "fill-current h-3 w-3",
+                    attrs: {
+                      viewBox: "0 0 20 20",
+                      xmlns: "http://www.w3.org/2000/svg"
+                    }
+                  },
+                  [
+                    _c("title", [_vm._v("Menu")]),
+                    _vm._v(" "),
+                    _c("path", {
+                      attrs: {
+                        d: "M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
+                      }
+                    })
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "w-full relative sm:block",
+              class: _vm.open ? "block" : "hidden"
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "flex-grow sm:flex sm:items-center sm:w-auto" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm.auth
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "text-orange-darker w-1/4 hover:text-orange cursor-pointer hidden sm:block",
+                          on: { click: _vm.togglePullDownMenu }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "flex justify-center items-center" },
+                            [
+                              _c("img", {
+                                staticClass: "rounded-full mr-3 w-10",
+                                attrs: { src: _vm.user.avatar }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "text-lg" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.user.nickName
+                                      ? _vm.user.nickName
+                                      : _vm.user.email
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "fill-current w-6",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.auth
+                    ? _c(
+                        "a",
+                        {
+                          staticClass:
+                            "px-4 font-title font-bold text-lg no-underline text-grey-darker ml-8 whitespace-no-wrap",
+                          attrs: { href: _vm.registerRoute }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Sign Up\n                    "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.auth
+                    ? _c(
+                        "a",
+                        {
+                          staticClass:
+                            "px-4 font-title font-bold text-lg text-orange no-underline whitespace-no-wrap",
+                          attrs: { href: _vm.loginRoute }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Sign In\n                    "
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "sm:absolute pin-r w-full sm:w-1/3 pt-6 flex-col bg-white text-orange-darkest shadow flex",
+                  class: _vm.dropDownOpen ? "sm:flex" : "sm:hidden"
+                },
+                [
+                  _c("div", { staticClass: "w-full p-6" }, [
+                    _c("a", { on: { click: _vm.logout } }, [_vm._v("Logout")])
+                  ])
+                ]
+              )
+            ]
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex items-center text-white mr-6 font-title mr-6 w-1/4 text-3xl"
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "text-orange-dark no-underline",
+            attrs: { href: "/" }
+          },
+          [_vm._v("JymTube")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-white flex-grow px-6" }, [
+      _c("div", { staticClass: "relative" }, [
+        _c("input", {
+          staticClass:
+            "w-full rounded shadow appearance-none border font-title text-orange-darkest bg-orange-lightest text-xl pl-3 py-2 pr-10",
+          attrs: { type: "text", placeholder: "IMPROVE YOURSELF" }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "btn btn-orange absolute pin-t pin-r mt-px mr-px text-xl"
+          },
+          [
+            _vm._v(
+              "\n                                Search\n                            "
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-28e9d386", module.exports)
+  }
+}
+
+/***/ }),
+/* 59 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

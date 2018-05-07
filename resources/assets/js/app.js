@@ -15,6 +15,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('add-video', require('./components/AddVideoComponent.vue'));
+Vue.component('nav-bar', require('./components/NavBarComponent.vue'));
 /*Vue.component('check-url', require('./components/CheckUrlComponent.vue'));
 Vue.component('found-video-from-url', require('./components/FoundVideoFromUrlComponent.vue'));
 Vue.component('url-not-found', require('./components/UrlNotFoundComponent.vue'));*/
