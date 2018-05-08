@@ -56,7 +56,7 @@
                     <div :class="dropDownOpen ? 'sm:flex' : 'sm:hidden'"
                          class="sm:absolute pin-r w-full sm:w-1/3 pt-6 flex-col bg-white text-orange-darkest shadow flex">
                         <div class="w-full p-6">
-                            <a @click="logout">Logout</a>
+                            <a @click="logout" class="cursor-pointer">Logout</a>
                         </div>
                     </div>
 
@@ -72,15 +72,15 @@
         data() {
             return {
                 open:         false,
-                dropDownOpen: false,
-                user:         {}
+                dropDownOpen: false
             }
         },
         props:   [
             'auth',
             'registerRoute',
             'loginRoute',
-            'logoutRoute'
+            'logoutRoute',
+            'user'
         ],
         methods: {
             toggle() {
@@ -96,16 +96,6 @@
                     })
             }
         },
-        created() {
-            if (this.auth) {
-                axios.get('/api/getAccount')
-                    .then(({data}) => {
-                        this.user = data.user;
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
-            }
-        }
+
     }
 </script>
