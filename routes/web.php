@@ -37,3 +37,18 @@ Route::get('verify-user/{code}', 'RegisterEmailController@activateUser')->name('
 // OAuth Routes
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('users', 'UserController@index')->name('users.index');
+Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+Route::patch('users/{user}', 'UserController@update')->name('users.update');
+
+Route::get('roles', 'RoleController@index')->name('roles.index');
+
+Route::get('permissions', 'PermissionController@index')->name('permissions.index');
+Route::get('permissions/create', 'PermissionController@create')->name('permissions.create');
+Route::get('permissions/{permission}/edit', 'PermissionController@edit')->name('permissions.edit');
+Route::delete('permissions/{permission}', 'PermissionController@destroy')->name('permissions.destroy');
+Route::post('permissions', 'PermissionController@store')->name('permissions.store');
+Route::patch('permissions/{permission}', 'PermissionController@update')->name('permissions.update');
+
+Route::resource('roles', 'RoleController');

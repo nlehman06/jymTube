@@ -17,7 +17,7 @@
 <body class="bg-grey-lightest font-body text-orange-darkest min-h-screen">
 <div id="app">
 
-    <nav-bar auth="{{ Auth::check() }}" user="{{ auth()->user() }}" register-route="{{ route('register') }}"
+    <nav-bar auth="{{ Auth::check() }}" register-route="{{ route('register') }}"
              login-route="{{ route('login') }}" logout-route="{{ route('logout') }}"
              :user="{{ json_encode(Auth::user()) }}"></nav-bar>
 

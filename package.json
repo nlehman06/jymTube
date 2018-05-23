@@ -27,5 +27,8 @@
     "mocha-webpack": "^1.1.0",
     "moxios": "^0.4.0",
     "moment": "^2.22.1"
+  },
+  "dependencies": {
+    "tailwindcss-tables": "^0.1.0"
   }
 }
