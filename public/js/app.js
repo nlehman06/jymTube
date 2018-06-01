@@ -38807,6 +38807,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -38816,7 +38819,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    props: ['auth', 'registerRoute', 'loginRoute', 'logoutRoute', 'user'],
+    props: ['auth', 'registerRoute', 'loginRoute', 'logoutRoute', 'user', 'isAdmin'],
     methods: {
         toggle: function toggle() {
             this.open = !this.open;
@@ -38993,6 +38996,16 @@ var render = function() {
                   class: _vm.dropDownOpen ? "sm:flex" : "sm:hidden"
                 },
                 [
+                  _vm.isAdmin
+                    ? _c("div", { staticClass: "w-full p-6" }, [
+                        _c(
+                          "a",
+                          { staticClass: "link", attrs: { href: "/users" } },
+                          [_vm._v("Users")]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("div", { staticClass: "w-full p-6" }, [
                     _c(
                       "a",

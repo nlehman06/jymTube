@@ -1,0 +1,7 @@
+.link {
+  @apply .no-underline .text-orange-darkest;
+}
+
+.link:hover {
+  @apply .text-orange;
+}

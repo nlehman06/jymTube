@@ -27,7 +27,7 @@
             </div>
             @auth
                 <div class="text-orange-darker flex-none w-1/4 flex justify-center items-center">
-                    <img src="{{ auth()->user()->avatar }}" class="rounded-full mr-3">
+                    <img src="{{ auth()->user()->avatar }}" class="rounded-full mr-3 w-10">
                     <span class="text-lg">{{ auth()->user()->nickName }}</span>
                 </div>
             @endauth

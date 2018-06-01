@@ -17,9 +17,14 @@
 <body class="bg-grey-lightest font-body text-orange-darkest min-h-screen">
 <div id="app">
 
-    <nav-bar auth="{{ Auth::check() }}" register-route="{{ route('register') }}"
-             login-route="{{ route('login') }}" logout-route="{{ route('logout') }}"
-             :user="{{ json_encode(Auth::user()) }}"></nav-bar>
+    <nav-bar
+            auth="{{ Auth::check() }}"
+            register-route="{{ route('register') }}"
+            login-route="{{ route('login') }}"
+            logout-route="{{ route('logout') }}"
+            :user="{{ json_encode(Auth::user()) }}"
+            :is-admin="{{ auth()->user()->can('Administer roles & permissions') ? 1 : 0 }}"
+    ></nav-bar>
 
     <main class="py-4 container mx-auto">
         @yield('content')

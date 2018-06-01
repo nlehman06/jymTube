@@ -55,6 +55,9 @@
                     </div>
                     <div :class="dropDownOpen ? 'sm:flex' : 'sm:hidden'"
                          class="sm:absolute pin-r w-full sm:w-1/3 pt-6 flex-col bg-white text-orange-darkest shadow flex">
+                        <div class="w-full p-6" v-if="isAdmin">
+                            <a href="/users" class="link">Users</a>
+                        </div>
                         <div class="w-full p-6">
                             <a @click="logout" class="cursor-pointer">Logout</a>
                         </div>
@@ -80,7 +83,8 @@
             'registerRoute',
             'loginRoute',
             'logoutRoute',
-            'user'
+            'user',
+            'isAdmin'
         ],
         methods: {
             toggle() {
