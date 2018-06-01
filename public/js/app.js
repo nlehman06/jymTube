@@ -38241,8 +38241,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -38312,137 +38310,122 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "p-3" }, [
-              _c("div", { staticClass: "w-full lg:flex" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "h-48 lg:h-auto lg:w-48 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden",
-                    attrs: { title: _vm.urlData.title }
-                  },
-                  [_c("img", { attrs: { src: _vm.urlData.picture } })]
-                ),
+              _c("div", { staticClass: "card" }, [
+                _c("div", {
+                  staticClass: "card-image",
+                  style: "background-image: url(" + _vm.urlData.picture + ");",
+                  attrs: { title: _vm.urlData.title }
+                }),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
-                  },
-                  [
-                    _c("div", { staticClass: "mb-8" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "mb-8" }, [
+                    _c("div", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(_vm.urlData.title))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-description" }, [
+                      _vm._v(_vm._s(_vm.urlData.description))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex items-center" }, [
+                    _c("img", {
+                      staticClass: "w-10 h-10 rounded-full mr-4",
+                      attrs: {
+                        src: _vm.urlData.from_profile,
+                        alt: "Profile Picture"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-sm" }, [
+                      _c("p", { staticClass: "text-black leading-none" }, [
+                        _vm._v(_vm._s(_vm.urlData.from_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text-grey-dark" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.videoCreatedOn) +
+                            "\n                            "
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "mx-auto mt-8 flex items-center flex-col" },
+                    [
                       _c(
-                        "div",
-                        { staticClass: "text-black font-bold text-xl mb-2" },
-                        [_vm._v(_vm._s(_vm.urlData.title))]
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.showThankYou,
+                              expression: "!showThankYou"
+                            }
+                          ],
+                          staticClass: "btn btn-orange",
+                          attrs: {
+                            id: "submitVideoForReviewButton",
+                            type: "button",
+                            disabled: _vm.loading
+                          },
+                          on: { click: _vm.submitVideoForReview }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(_vm.submitButtonText) +
+                              "\n                        "
+                          )
+                        ]
                       ),
                       _vm._v(" "),
-                      _c("p", { staticClass: "text-grey-darker text-base" }, [
-                        _vm._v(_vm._s(_vm.urlData.description))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex items-center" }, [
-                      _c("img", {
-                        staticClass: "w-10 h-10 rounded-full mr-4",
-                        attrs: {
-                          src: _vm.urlData.from_profile,
-                          alt: "Profile Picture"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text-sm" }, [
-                        _c("p", { staticClass: "text-black leading-none" }, [
-                          _vm._v(_vm._s(_vm.urlData.from_name))
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "text-grey-dark" }, [
+                      _c(
+                        "p",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.showThankYou,
+                              expression: "showThankYou"
+                            }
+                          ]
+                        },
+                        [
                           _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.videoCreatedOn) +
-                              "\n                            "
+                            "Thank you for your help in adding mass to Jym Tube!"
                           )
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "mx-auto mt-8 flex items-center flex-col"
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !_vm.showThankYou,
-                                expression: "!showThankYou"
-                              }
-                            ],
-                            staticClass: "btn btn-orange",
-                            attrs: {
-                              id: "submitVideoForReviewButton",
-                              type: "button",
-                              disabled: _vm.loading
-                            },
-                            on: { click: _vm.submitVideoForReview }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(_vm.submitButtonText) +
-                                "\n                        "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "p",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.showThankYou,
-                                expression: "showThankYou"
-                              }
-                            ]
-                          },
-                          [
-                            _vm._v(
-                              "Thank you for your help in adding mass to Jym Tube!"
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.showThankYou,
-                                expression: "showThankYou"
-                              }
-                            ],
-                            staticClass: "btn btn-orange",
-                            attrs: { href: "/home", id: "continueToHome" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            Continue to GSD!\n                        "
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ]
-                )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.showThankYou,
+                              expression: "showThankYou"
+                            }
+                          ],
+                          staticClass: "btn btn-orange",
+                          attrs: { href: "/home", id: "continueToHome" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Continue to GSD!\n                        "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ])
             ])
           ]
@@ -38810,6 +38793,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -38819,7 +38805,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    props: ['auth', 'registerRoute', 'loginRoute', 'logoutRoute', 'user', 'isAdmin'],
+    props: ['auth', 'registerRoute', 'loginRoute', 'logoutRoute', 'user', 'isAdmin', 'canApproveVideos'],
     methods: {
         toggle: function toggle() {
             this.open = !this.open;
@@ -38996,6 +38982,19 @@ var render = function() {
                   class: _vm.dropDownOpen ? "sm:flex" : "sm:hidden"
                 },
                 [
+                  _vm.canApproveVideos
+                    ? _c("div", { staticClass: "w-full p-6" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "link",
+                            attrs: { href: "/approveVideos" }
+                          },
+                          [_vm._v("Approve Videos")]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _vm.isAdmin
                     ? _c("div", { staticClass: "w-full p-6" }, [
                         _c(

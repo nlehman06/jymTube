@@ -22,3 +22,7 @@ $factory->define(App\Video::class, function (Faker $faker) {
         'status'               => 'submitted'
     ];
 });
+
+$factory->state(App\Video::class, 'approved', [
+    'status' => 'approved'
+]);

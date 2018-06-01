@@ -5,15 +5,13 @@
                 We found a video from {{ urlData.provider }}!
             </div>
             <div class="p-3">
-                <div class="w-full lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                         :title="urlData.title">
-                        <img :src="urlData.picture">
-                    </div>
-                    <div class="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div class="card">
+                    <div class="card-image" :style="`background-image: url(${urlData.picture});`"
+                         :title="urlData.title"></div>
+                    <div class="card-body">
                         <div class="mb-8">
-                            <div class="text-black font-bold text-xl mb-2">{{ urlData.title }}</div>
-                            <p class="text-grey-darker text-base">{{ urlData.description }}</p>
+                            <div class="card-title">{{ urlData.title }}</div>
+                            <p class="card-description">{{ urlData.description }}</p>
                         </div>
                         <div class="flex items-center">
                             <img class="w-10 h-10 rounded-full mr-4"

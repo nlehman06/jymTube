@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" class="h-full">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,8 +14,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="bg-grey-lightest font-body text-orange-darkest min-h-screen">
-<div id="app">
+<body class="bg-grey-lightest font-body text-orange-darkest min-h-screen h-full">
+<div id="app" class="flex flex-col h-full">
 
     <nav-bar
             auth="{{ Auth::check() }}"
@@ -24,13 +24,14 @@
             logout-route="{{ route('logout') }}"
             :user="{{ json_encode(Auth::user()) }}"
             :is-admin="{{ auth()->user()->can('Administer roles & permissions') ? 1 : 0 }}"
+            :can-approve-videos="{{ auth()->user()->can('approve videos') ? 1 : 0 }}"
     ></nav-bar>
 
-    <main class="py-4 container mx-auto">
+    <main class="py-4 container mx-auto flex-1">
         @yield('content')
     </main>
 
-    <footer class="bg-grey-light shadow absolute pin-b w-full py-4">
+    <footer class="bg-grey-light shadow pin-b w-full py-4">
         <add-missing-video add-video-route="{{ route('addVideo') }}"
                            :user="{{ json_encode(Auth::user()) }}"></add-missing-video>
     </footer>

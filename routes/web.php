@@ -52,3 +52,5 @@ Route::post('permissions', 'PermissionController@store')->name('permissions.stor
 Route::patch('permissions/{permission}', 'PermissionController@update')->name('permissions.update');
 
 Route::resource('roles', 'RoleController');
+
+Route::get('approveVideos', 'ApproveVideosController@index')->name('approveVideos.index');

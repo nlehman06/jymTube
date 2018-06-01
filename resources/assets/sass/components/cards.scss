@@ -1,0 +1,33 @@
+.card {
+  @apply .w-full;
+}
+
+.card-image {
+  @apply .h-48 .flex-none .rounded-t .text-center .overflow-hidden .bg-cover .bg-top .bg-center;
+}
+
+.card-body {
+  @apply .border-r .border-b .border-l .border-grey-light  .bg-white .rounded-b .p-4 .flex .flex-col .justify-between .leading-normal;
+}
+
+.card-title {
+  @apply .text-black .font-bold .text-xl .mb-2;
+}
+
+.card-description {
+  @apply .text-grey-darker .text-base;
+}
+
+@screen lg {
+  .card {
+    @apply .flex;
+  }
+
+  .card-image {
+    @apply .w-48 .h-auto .rounded-t-none .rounded-l;
+  }
+
+  .card-body {
+    @apply .border-l-0 .border-t .border-grey-light .rounded-b-none .rounded-r;
+  }
+}
