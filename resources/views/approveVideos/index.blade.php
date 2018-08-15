@@ -4,7 +4,7 @@
 
     <div class="flex flex-col">
         @foreach($videos as $video)
-            <div class="card">
+            <div class="card py-2">
                 <div class="card-image"
                      title="{{ $video->title }}" style="background-image: url({{ $video->picture }})"></div>
                 <div class="card-body">
@@ -21,6 +21,11 @@
                             <p class="text-grey-dark">
                                 {{ $video->created_at->format('m/d/y') }}
                             </p>
+                        </div>
+                        <div class="flex-1 flex justify-center">
+                            <a href="{{ route('approveVideos.edit', $video->id) }}" class="btn btn-orange">
+                                Categorize
+                            </a>
                         </div>
                     </div>
                 </div>

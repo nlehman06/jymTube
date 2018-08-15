@@ -14,32 +14,19 @@ class ApproveVideosController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'permission:approve videos']);
     }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
-        $this->authorize('approve-videos');
-
         $videos = Video::submitted()->latest()->get();
 
         return view('approveVideos.index', compact('videos'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -67,12 +54,12 @@ class ApproveVideosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Video $video
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Video $video)
     {
-        //
+        return view('approveVideos.edit', compact('video'));
     }
 
     /**

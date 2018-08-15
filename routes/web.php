@@ -54,3 +54,4 @@ Route::patch('permissions/{permission}', 'PermissionController@update')->name('p
 Route::resource('roles', 'RoleController');
 
 Route::get('approveVideos', 'ApproveVideosController@index')->name('approveVideos.index');
+Route::get('approveVideos/{video}/edit', 'ApproveVideosController@edit')->name('approveVideos.edit');

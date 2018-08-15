@@ -9,18 +9,30 @@ use function factory;
 use function route;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ApproveVideosTest extends TestCase {
 
     use RefreshDatabase;
 
+    private $approver;
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
+
+        if (!$this->approver)
+        {
+            $this->approver = factory(User::class)->create();
+
+            Permission::create(['name' => 'approve videos']);
+
+            $this->approver->givePermissionTo('approve videos');
+
+            $this->actingAs($this->approver);
+        }
     }
 
     /** @test */
@@ -29,14 +41,8 @@ class ApproveVideosTest extends TestCase {
         $submittedVideo = factory(Video::class)->create();
         $approvedVideo = factory(Video::class)->states('approved')->create();
 
-        $approver = factory(User::class)->create();
 
-        Permission::create(['name' => 'approve videos']);
-
-        $approver->givePermissionTo('approve videos');
-
-        $this->actingAs($approver)
-            ->get(route('approveVideos.index'))
+        $this->get(route('approveVideos.index'))
             ->assertStatus(200)
             ->assertSee($submittedVideo->title)
             ->assertDontSee($approvedVideo->title);
@@ -51,5 +57,14 @@ class ApproveVideosTest extends TestCase {
             ->get(route('approveVideos.index'))
             ->assertForbidden();
 
+    }
+
+    /** @test */
+    public function approve_user_may_edit_video()
+    {
+        $submittedVideo = factory(Video::class)->create();
+
+        $this->get(route('approveVideos.edit', $submittedVideo->id))
+            ->assertSee($submittedVideo->title);
     }
 }

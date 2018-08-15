@@ -15,7 +15,7 @@
 }
 
 .card-description {
-  @apply .text-grey-darker .text-base;
+  @apply .text-grey-darker .text-base .overflow-y-scroll .h-24 .whitespace-pre-line;
 }
 
 @screen lg {

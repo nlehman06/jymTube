@@ -29,6 +29,7 @@
     "moment": "^2.22.1"
   },
   "dependencies": {
+    "@voerro/vue-tagsinput": "^1.6.0",
     "tailwindcss-tables": "^0.1.0"
   }
 }

@@ -1107,6 +1107,9 @@ th {
 .card-description {
   color: #606f7b;
   font-size: 1rem;
+  overflow-y: scroll;
+  height: 6rem;
+  white-space: pre-line;
 }
 
 @media (min-width: 992px) {

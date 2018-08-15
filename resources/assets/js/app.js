@@ -24,6 +24,9 @@ let store = {
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import VoerroTagsInput from '@voerro/vue-tagsinput';
+
+Vue.component('tags-input', VoerroTagsInput);
 
 Vue.component('add-video', require('./components/AddVideoComponent.vue'));
 Vue.component('nav-bar', require('./components/NavBarComponent.vue'));

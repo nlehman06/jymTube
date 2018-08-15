@@ -12,9 +12,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-grey-lightest font-body text-orange-darkest min-h-screen h-full">
+
 <div id="app" class="flex flex-col h-full">
 
     <nav-bar
@@ -23,8 +25,8 @@
             login-route="{{ route('login') }}"
             logout-route="{{ route('logout') }}"
             :user="{{ json_encode(Auth::user()) }}"
-            :is-admin="{{ auth()->user()->can('Administer roles & permissions') ? 1 : 0 }}"
-            :can-approve-videos="{{ auth()->user()->can('approve videos') ? 1 : 0 }}"
+            :is-admin="{{ optional(auth()->user())->can('Administer roles & permissions') ? 1 : 0 }}"
+            :can-approve-videos="{{ optional(auth()->user())->can('approve videos') ? 1 : 0 }}"
     ></nav-bar>
 
     <main class="py-4 container mx-auto flex-1">
@@ -44,5 +46,13 @@
 </script>
 <script src="{{ asset('js/app.js') }}" defer></script>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=155995138377047&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>
