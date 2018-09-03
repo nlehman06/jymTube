@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\StreamingServices\FacebookService;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -48,8 +49,38 @@ class Video extends Model {
 
     protected $guarded = [];
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
     public function scopeSubmitted($query)
     {
         return $query->where('status', 'submitted');
+    }
+
+    public function isApproved()
+    {
+        return $this->status === 'approved';
+    }
+
+    public function getFromProfileAttribute()
+    {
+        if ($this->provider !== 'facebook')
+        {
+            return $this->from_profile;
+        }
+
+        return (new FacebookService())->getDataFromProvider($this->provider_id)['from_profile'];
+    }
+
+    public function getPictureAttribute()
+    {
+        if ($this->provider !== 'facebook')
+        {
+            return $this->picture;
+        }
+
+        return (new FacebookService())->getDataFromProvider($this->provider_id)['picture'];
     }
 }

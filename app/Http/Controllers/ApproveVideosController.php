@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Video;
+use function array_map;
 use function compact;
 use Illuminate\Http\Request;
+use Response;
 
-class ApproveVideosController extends Controller
-{
+class ApproveVideosController extends Controller {
 
     /**
      * ApproveVideosController constructor.
@@ -32,7 +34,7 @@ class ApproveVideosController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +45,7 @@ class ApproveVideosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -65,19 +67,30 @@ class ApproveVideosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Video $video
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Video $video)
     {
-        //
+        $data = request()->validate([
+            'selectedTags' => 'required|array|min:1'
+        ]);
+
+        $tags = array_map(function ($tag) {
+            return Tag::firstOrCreate(['name' => $tag])->id;
+        }, $data['selectedTags']);
+
+        $video->tags()->sync($tags);
+
+        $video->update(['status' => 'approved']);
+
+        return Response::json(['successful' => true], 201);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

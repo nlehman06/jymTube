@@ -67,4 +67,55 @@ class ApproveVideosTest extends TestCase {
         $this->get(route('approveVideos.edit', $submittedVideo->id))
             ->assertSee($submittedVideo->title);
     }
+
+    /** @test */
+    public function approve_user_may_approve_video()
+    {
+        $submittedVideo = factory(Video::class)->create();
+
+        $formData = [
+            'selectedTags' => []
+        ];
+
+        $this->patch(route('approveVideos.update', $submittedVideo->id), $formData)
+            ->assertSuccessful()
+            ->assertJson([
+                'successful' => true
+            ]);
+
+        tap($submittedVideo->fresh(), function ($video) {
+            self::assertTrue($video->isApproved());
+        });
+    }
+
+    /** @test */
+    public function approving_a_video_requires_at_least_one_tag()
+    {
+        $submittedVideo = factory(Video::class)->create();
+
+        $formData = [
+            'selectedTags' => []
+        ];
+
+        $this->withExceptionHandling()
+            ->patch(route('approveVideos.update', $submittedVideo->id), $formData)
+            ->assertSessionHasErrors(['selectedTags']);
+    }
+
+    /** @test */
+    public function approving_a_video_saves_tags()
+    {
+        $submittedVideo = factory(Video::class)->create();
+
+        $formData = [
+            'selectedTags' => ['curl', 'excercises']
+        ];
+
+        $this->patch(route('approveVideos.update', $submittedVideo->id), $formData)
+            ->assertSuccessful();
+
+        tap($submittedVideo->fresh(), function ($video) {
+            $this->assertCount(2, $video->tags);
+        });
+    }
 }
