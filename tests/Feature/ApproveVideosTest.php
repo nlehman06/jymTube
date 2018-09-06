@@ -74,7 +74,7 @@ class ApproveVideosTest extends TestCase {
         $submittedVideo = factory(Video::class)->create();
 
         $formData = [
-            'selectedTags' => []
+            'selectedTags' => ['curl', 'excercises']
         ];
 
         $this->patch(route('approveVideos.update', $submittedVideo->id), $formData)

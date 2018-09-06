@@ -3,8 +3,8 @@
 namespace App;
 
 use App\StreamingServices\FacebookService;
+use function config;
 use Illuminate\Database\Eloquent\Model;
-use Rinvex\Categories\Traits\Categorizable;
 
 /**
  * App\Video
@@ -48,8 +48,6 @@ use Rinvex\Categories\Traits\Categorizable;
  */
 class Video extends Model {
 
-    use Categorizable;
-
     protected $guarded = [];
 
     public function tags()
@@ -67,21 +65,21 @@ class Video extends Model {
         return $this->status === 'approved';
     }
 
-    public function getFromProfileAttribute()
+    public function getFromProfileAttribute($value)
     {
-        if ($this->provider !== 'facebook')
+        if ($this->provider !== 'facebook' or config('app.env') === 'testing')
         {
-            return $this->from_profile;
+            return $value;
         }
 
         return (new FacebookService())->getDataFromProvider($this->provider_id)['from_profile'];
     }
 
-    public function getPictureAttribute()
+    public function getPictureAttribute($value)
     {
-        if ($this->provider !== 'facebook')
+        if ($this->provider !== 'facebook' or config('app.env') === 'testing')
         {
-            return $this->picture;
+            return $value;
         }
 
         return (new FacebookService())->getDataFromProvider($this->provider_id)['picture'];

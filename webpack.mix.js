@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
 let tailwindcss = require('tailwindcss');
 const webpack = require('webpack');
 

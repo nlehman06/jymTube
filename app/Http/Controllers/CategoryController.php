@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use function compact;
 use Illuminate\Http\Request;
-use Rinvex\Categories\Models\Category;
 use function route;
 
 class CategoryController extends Controller {
@@ -25,9 +24,9 @@ class CategoryController extends Controller {
      */
     public function index()
     {
-        $categories = app('rinvex.categories.category')->get()->toTree();
+        //$categories = app('rinvex.categories.category')->get()->toTree();
 
-        return view('categories.index')->with(compact('categories'));
+        //return view('categories.index')->with(compact('categories'));
     }
 
     /**
@@ -52,7 +51,7 @@ class CategoryController extends Controller {
             'name' => 'required|string|min:1'
         ]);
 
-        Category::create($data);
+        //Category::create($data);
 
         return redirect(route('categories.index'));
     }
