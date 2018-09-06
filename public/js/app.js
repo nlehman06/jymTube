@@ -39452,6 +39452,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -39461,7 +39464,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    props: ['auth', 'registerRoute', 'loginRoute', 'logoutRoute', 'user', 'isAdmin', 'canApproveVideos'],
+    props: ['auth', 'registerRoute', 'loginRoute', 'logoutRoute', 'user', 'isAdmin', 'canApproveVideos', 'canManageCategories'],
     methods: {
         toggle: function toggle() {
             this.open = !this.open;
@@ -39647,6 +39650,19 @@ var render = function() {
                             attrs: { href: "/approveVideos" }
                           },
                           [_vm._v("Approve Videos")]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.canManageCategories
+                    ? _c("div", { staticClass: "w-full p-6" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "link",
+                            attrs: { href: "/categories" }
+                          },
+                          [_vm._v("Manage Categories")]
                         )
                       ])
                     : _vm._e(),

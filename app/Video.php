@@ -4,6 +4,7 @@ namespace App;
 
 use App\StreamingServices\FacebookService;
 use Illuminate\Database\Eloquent\Model;
+use Rinvex\Categories\Traits\Categorizable;
 
 /**
  * App\Video
@@ -46,6 +47,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class Video extends Model {
+
+    use Categorizable;
 
     protected $guarded = [];
 

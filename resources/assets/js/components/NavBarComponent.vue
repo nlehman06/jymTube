@@ -58,6 +58,9 @@
                         <div class="w-full p-6" v-if="canApproveVideos">
                             <a href="/approveVideos" class="link">Approve Videos</a>
                         </div>
+                        <div class="w-full p-6" v-if="canManageCategories">
+                            <a href="/categories" class="link">Manage Categories</a>
+                        </div>
                         <div class="w-full p-6" v-if="isAdmin">
                             <a href="/users" class="link">Users</a>
                         </div>
@@ -88,7 +91,8 @@
             'logoutRoute',
             'user',
             'isAdmin',
-            'canApproveVideos'
+            'canApproveVideos',
+            'canManageCategories'
         ],
         methods: {
             toggle() {

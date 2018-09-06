@@ -56,3 +56,5 @@ Route::resource('roles', 'RoleController');
 Route::get('approveVideos', 'ApproveVideosController@index')->name('approveVideos.index');
 Route::get('approveVideos/{video}/edit', 'ApproveVideosController@edit')->name('approveVideos.edit');
 Route::patch('api/approveVideos/{video}', 'ApproveVideosController@update')->name('approveVideos.update');
+
+Route::resource('categories', 'CategoryController');

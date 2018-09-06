@@ -27,6 +27,7 @@
             :user="{{ json_encode(Auth::user()) }}"
             :is-admin="{{ optional(auth()->user())->can('Administer roles & permissions') ? 1 : 0 }}"
             :can-approve-videos="{{ optional(auth()->user())->can('approve videos') ? 1 : 0 }}"
+            :can-manage-categories="{{ optional(auth()->user())->can('manage categories') ? 1 : 0 }}"
     ></nav-bar>
 
     <main class="py-4 container mx-auto flex-1">
